@@ -1,9 +1,6 @@
 # Monochrome-OLED-editor
 Monochrome OLED editor 
 
-
-![OLED Converter Hero](banner.png)
-
 ## 🌐 English Version
 
 ### 📝 Description
