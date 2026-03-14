@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLED Konwerter Obrazów</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <h1>OLED Konwerter</h1>
+            </div>
+            <div class="actions">
+                <button id="theme-toggle" class="icon-btn" title="Przełącz motyw">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <main class="main-content">
+            <!-- Sidebar Controls -->
+            <aside class="sidebar glass-panel">
+                <div class="control-group">
+                    <h3>1. Wczytaj Obraz</h3>
+                    <div class="file-drop-zone" id="drop-zone">
+                        <input type="file" id="file-input" accept="image/jpeg, image/png, image/bmp">
+                        <div class="drop-text">
+                            <span class="icon">📁</span>
+                            <p>Przeciągnij plik lub kliknij</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>2. Ustawienia</h3>
+
+                    <label>Rozmiar (Szer. x Wys.)</label>
+                    <div class="input-row">
+                        <input type="number" id="width-input" value="128" min="1">
+                        <span>x</span>
+                        <input type="number" id="height-input" value="64" min="1">
+                    </div>
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="keep-ratio" checked>
+                        <label for="keep-ratio">Zachowaj proporcje</label>
+                    </div>
+
+                    <label>Próg Jasności (0-255)</label>
+                    <div class="slider-container">
+                        <input type="range" id="threshold-slider" min="0" max="255" value="128">
+                        <span id="threshold-value">128</span>
+                    </div>
+
+                    <label>Inwersja Kolorów</label>
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="invert-colors">
+                        <label for="invert-colors">Odwróć kolory</label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>3. Eksport</h3>
+                    <label>Format</label>
+                    <select id="export-format">
+                        <option value="xbm">XBM (Klucz Array)</option>
+                        <option value="c_array">C Array (Hex)</option>
+                        <option value="raw">Raw Bytes</option>
+                    </select>
+
+                    <label>Układ Bajtów (Dla C Array)</label>
+                    <select id="byte-layout">
+                        <option value="vertical">Pionowy (Vertical - SSD1306)</option>
+                        <option value="horizontal">Poziomy (Horizontal)</option>
+                    </select>
+                </div>
+            </aside>
+
+            <!-- Preview & Editor Area -->
+            <section class="editor-area glass-panel">
+                <div class="preview-controls">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-view="editor">Edytor Pikseli</button>
+                        <button class="tab-btn" data-view="original">Oryginał</button>
+                    </div>
+                    <div class="zoom-controls">
+                        <button id="zoom-out">-</button>
+                        <span id="zoom-level">100%</span>
+                        <button id="zoom-in">+</button>
+                    </div>
+                </div>
+
+                <div class="canvas-container" id="canvas-wrapper">
+                    <canvas id="editor-canvas"></canvas>
+                    <div id="empty-state">
+                        <p>Wczytaj obraz aby rozpocząć edycję</p>
+                    </div>
+                </div>
+
+                <div class="editor-tools">
+                    <button id="tool-pencil" class="tool-btn active" title="Ołówek">✏️</button>
+                    <button id="tool-eraser" class="tool-btn" title="Gumka">🧼</button>
+                    <button id="clear-canvas" class="tool-btn" title="Wyczyść wszystko">🗑️</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Code Output Footer -->
+        <footer class="code-footer glass-panel">
+            <div class="footer-header">
+                <h3>Wygenerowany Kod</h3>
+                <div class="footer-actions">
+                    <button id="save-btn" class="secondary-btn" title="Pobierz plik">💾 Zapisz plik</button>
+                    <button id="copy-btn" class="primary-btn">Kopiuj do schowka</button>
+                </div>
+            </div>
+            <div class="code-editor">
+                <textarea id="code-output" readonly></textarea>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
