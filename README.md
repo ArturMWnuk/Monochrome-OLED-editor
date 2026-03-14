@@ -4,7 +4,7 @@ Monochrome OLED editor
 ## 🌐 English Version
 
 ### 📝 Description
-**OLED Converter** is a powerful, web-based tool designed for developers and enthusiasts working with monochrome OLED displays (like SSD1306, SH1106). It allows you to quickly convert standard images (JPG, PNG, BMP) into various code formats compatible with microcontrollers like Arduino, ESP32, or STM32.
+**OLED Converter** is web-based tool designed for developers and enthusiasts working with monochrome OLED displays (like SSD1306, SH1106). It allows you to quickly convert standard images (JPG, PNG, BMP) into various code formats compatible with microcontrollers like Arduino, ESP32, or STM32.
 
 With a built-in pixel editor and real-time preview, you can fine-tune your graphics to look perfect on small screens.
 
@@ -33,7 +33,7 @@ With a built-in pixel editor and real-time preview, you can fine-tune your graph
 ## 🇵🇱 Wersja Polska
 
 ### 📝 Opis
-**OLED Konwerter** to zaawansowane narzędzie webowe stworzone dla programistów i hobbystów pracujących z monochromatycznymi wyświetlaczami OLED (np. SSD1306, SH1106). Pozwala na szybką konwersję standardowych obrazów (JPG, PNG, BMP) na różne formaty kodu kompatybilne z mikrokontrolerami takimi jak Arduino, ESP32 czy STM32.
+**OLED Konwerter** to narzędzie webowe stworzone dla programistów i hobbystów pracujących z monochromatycznymi wyświetlaczami OLED (np. SSD1306, SH1106). Pozwala na szybką konwersję standardowych obrazów (JPG, PNG, BMP) na różne formaty kodu kompatybilne z mikrokontrolerami takimi jak Arduino, ESP32 czy STM32.
 
 Dzięki wbudowanemu edytorowi pikseli i podglądowi w czasie rzeczywistym, możesz dopracować swoją grafikę tak, aby wyglądała idealnie na małym ekranie.
 
